@@ -9,6 +9,7 @@ import org.apache.commons.lang3.RandomStringUtils;
 
 
 import java.math.BigDecimal;
+import java.sql.Blob;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -25,6 +26,8 @@ public class Room {
     private String RoomType;
     private BigDecimal roomPrice;
     private boolean isBooked = false;
+    @Lob
+    private Blob photo;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<BookedRoom> bookings;
