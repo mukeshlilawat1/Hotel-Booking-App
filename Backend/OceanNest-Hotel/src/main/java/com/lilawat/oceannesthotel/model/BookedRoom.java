@@ -14,8 +14,12 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 public class BookedRoom {
+//    @Id -> this annotation is used to specify the primary key of an entity.
     @Id
+//    @GeneratedValue -> this annotation is used to specify the generation strategy for the primary key.
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+
+//    private -> this keyword is used to declare a field that can be accessed directly
     private Long bookingId;
 
     @Column(name = "check_In")

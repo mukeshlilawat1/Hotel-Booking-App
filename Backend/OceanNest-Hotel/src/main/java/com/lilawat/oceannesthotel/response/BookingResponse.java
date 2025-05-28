@@ -7,9 +7,13 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 
+//data transfer object (DTO) for booking response
 @Data
+//@AllArgsConstructor -> generates a constructor with all fields as parameters
 @AllArgsConstructor
+//@NoArgsConstructor -> generates a no-argument constructor
 @NoArgsConstructor
+
 public class BookingResponse {
     private Long id;
     private LocalDate checkInDate;
