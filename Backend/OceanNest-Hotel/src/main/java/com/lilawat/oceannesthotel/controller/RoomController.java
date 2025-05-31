@@ -20,6 +20,7 @@ import java.sql.SQLException;
 @RequestMapping("/rooms")
 public class RoomController {
     private final IRoomService roomService;
+    
 
     @PostMapping("/add/new-room")
     public ResponseEntity<RoomResponse> addNewRoom(
