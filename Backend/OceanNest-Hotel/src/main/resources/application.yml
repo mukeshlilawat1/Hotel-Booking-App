@@ -1,8 +1,7 @@
-
 server:
-  port: 9192
+  port: 5000
 
-spring:
+  spring:
   datasource:
     username: root
     password: 1215
@@ -19,3 +18,4 @@ spring:
       max-file-size: 5MB
       max-request-size: 5MB
       file-size-threshold: 2KB
+

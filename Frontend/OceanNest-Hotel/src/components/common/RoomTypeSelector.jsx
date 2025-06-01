@@ -1,67 +1,68 @@
-import React, { useEffect, useState } from 'react'
-// Import getRoomTypes from its module (update the path as needed)
-import { getRoomTypes } from '../utils/ApiFunctions';
+import React, { useState, useEffect } from "react"
+import { getRoomTypes } from "../utils/ApiFunctions"
 
 const RoomTypeSelector = ({ handleRoomInputChange, newRoom }) => {
-    const [roomTypes, setRoomTypes] = useState([]);
-    const [showNewRoomTypeInput, setShowNewRoomTypeInput] = useState(false);
-    const [newRoomTypes, setNewRoomTypes] = useState("");
+    const [roomTypes, setRoomTypes] = useState([""])
+    const [showNewRoomTypeInput, setShowNewRoomTypeInput] = useState(false)
+    const [newRoomType, setNewRoomType] = useState("")
 
     useEffect(() => {
         getRoomTypes().then((data) => {
-            setNewRoomTypes(data);
+            setRoomTypes(data)
         })
     }, [])
 
-
-    const handleNewRoomTypeInputChange = (event) => {
-        setNewRoomTypes(event.target.value);
+    const handleNewRoomTypeInputChange = (e) => {
+        setNewRoomType(e.target.value)
     }
 
     const handleAddNewRoomType = () => {
-        if (newRoomTypes !== "") {
-            setRoomTypes([...roomTypes, newRoomTypes])
-            setNewRoomTypes("");
-            setShowNewRoomTypeInput(false);
+        if (newRoomType !== "") {
+            setRoomTypes([...roomTypes, newRoomType])
+            setNewRoomType("")
+            setShowNewRoomTypeInput(false)
         }
     }
-
 
     return (
         <>
             {roomTypes.length > 0 && (
                 <div>
-                    <select required className='form-select'
-                        id='roomType' name='roomType'
-                        value={newRoom.roomTypes}
+                    <select
+                        required
+                        className="form-select"
+                        name="roomType"
                         onChange={(e) => {
                             if (e.target.value === "Add New") {
-                                setShowNewRoomTypeInput(true);
+                                setShowNewRoomTypeInput(true)
                             } else {
-                                handleRoomInputChange(e);
+                                handleRoomInputChange(e)
                             }
-                        }}>
-
-                        <option value={""}>
-                            Select a Room Type
-                        </option>
-                        <option value={"Add New"}> Add New</option>
-                        {roomTypes.map((type, index) => (
+                        }}
+                        value={newRoom.roomType}>
+                        <option value="">Select a room type</option>
+                        <option value={"Add New"}>Add New</option>
+                        {Array.isArray(roomTypes) && roomTypes.map((type, index) => (
                             <option key={index} value={type}>
                                 {type}
-
                             </option>
                         ))}
+
                     </select>
-
                     {showNewRoomTypeInput && (
-                        <div className='input-group'>
-                            <input className='form-control ' type='text'
-                                placeholder='Enter a New Room Type'
-                                onChange={handleNewRoomTypeInputChange}
-                            />
-
-                            <button className='btn btn-hotel' type='button' onClick={handleAddNewRoomType}>Add</button>
+                        <div className="mt-2">
+                            <div className="input-group">
+                                <input
+                                    type="text"
+                                    className="form-control"
+                                    placeholder="Enter New Room Type"
+                                    value={newRoomType}
+                                    onChange={handleNewRoomTypeInputChange}
+                                />
+                                <button className="btn btn-hotel" type="button" onClick={handleAddNewRoomType}>
+                                    Add
+                                </button>
+                            </div>
                         </div>
                     )}
                 </div>
